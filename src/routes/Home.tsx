@@ -1,11 +1,65 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { SearchItems, searchItemSchema, SearchItemSchemaType } from '../validation/searchItem';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect, useState } from 'react';
+import { ErrorMessage } from '@hookform/error-message';
 
 const Home = () => {
-  const search = useLocation().search;
-  const query = new URLSearchParams(search);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const keywords = searchParams.get('keywords') || '';
+  // react hook form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SearchItemSchemaType>({
+    resolver: zodResolver(searchItemSchema),
+    defaultValues: {
+      keywords: keywords,
+    },
+  });
+  // update url
+  const onSubmit: SubmitHandler<SearchItemSchemaType> = async (data) => {
+    navigate(`?keywords=${data.keywords}`);
+  };
+  // get search result
+  const [data, setData] = useState<SearchItems | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (keywords !== '') {
+        const result: SearchItems = await fetch(`http://localhost:5000/api/item/search?keywords=${keywords}`)
+          .then((res) => res.json())
+          .catch((err) => console.log(err));
+        setData(result);
+      }
+    };
+    fetchData();
+  }, [keywords]);
   return (
     <div>
-      <h1>Param: {query.get('search') ?? 'Default Value'}</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="keywords">Search: </label>
+        <input id="keywords" type="text" {...register('keywords')} placeholder="Search" />
+        <br />
+        <ErrorMessage errors={errors} name="keywords" message={errors.keywords?.message} />
+        <br />
+        <input type="submit" value="検索" />
+      </form>
+      <div>
+        {data?.search_items.map((item, index) => (
+          <div key={index}>
+            <h2>{item.name}</h2>
+            <p>{item.id}</p>
+            <p>{item.visible_id}</p>
+            <p>{item.connector.join(',')}</p>
+            <p>{item.color}</p>
+            <p>{item.is_rent ? 'レンタル不可' : 'レンタル可'}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
