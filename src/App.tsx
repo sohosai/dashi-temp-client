@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
-import { Home, IndividualItem, PageNotFound, Register, Update } from './index';
+import { Home, IndividualItem, PageNotFound, Register, Update } from '.';
+import { FC } from 'react';
 
-const App = () => {
+const App: FC = () => {
   return (
     <>
       <Routes>

@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
-const Update = () => {
+const Update: FC = () => {
   const { id } = useParams<{ id: string }>();
   return (
     <div>

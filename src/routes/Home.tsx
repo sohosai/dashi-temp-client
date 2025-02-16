@@ -1,11 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { SearchItems, searchItemSchema, SearchItemSchemaType } from '../validation/searchItem';
+import { searchItemSchema, SearchItemSchemaType } from '../validation/searchItem';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
+import { SearchItemsResponse } from '../model/searchItemResponse';
 
-const Home = () => {
+const Home: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
@@ -22,15 +23,15 @@ const Home = () => {
     },
   });
   // update url
-  const onSubmit: SubmitHandler<SearchItemSchemaType> = async (data) => {
+  const onSubmit: SubmitHandler<SearchItemSchemaType> = (data) => {
     navigate(`?keywords=${data.keywords}`);
   };
   // get search result
-  const [data, setData] = useState<SearchItems | null>(null);
+  const [data, setData] = useState<SearchItemsResponse | null>(null);
   useEffect(() => {
     const fetchData = async () => {
       if (keywords !== '') {
-        const result: SearchItems = await fetch(`http://localhost:5000/api/item/search?keywords=${keywords}`)
+        const result: SearchItemsResponse = await fetch(`http://localhost:5000/api/item/search?keywords=${keywords}`)
           .then((res) => res.json())
           .catch((err) => console.log(err));
         setData(result);
@@ -57,6 +58,7 @@ const Home = () => {
             <p>{item.connector.join(',')}</p>
             <p>{item.color}</p>
             <p>{item.is_rent ? 'レンタル不可' : 'レンタル可'}</p>
+            <a href={`/item/${item.id}`}>詳細</a>
           </div>
         ))}
       </div>
