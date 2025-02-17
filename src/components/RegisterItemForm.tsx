@@ -1,11 +1,17 @@
 import { SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
 import { registerItemSchema, RegisterItemSchemaType } from '../validation/registerItem';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FC } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
-import { RegisterItemRequest } from '../model/registerItemRequest';
+import { useFetchRegisterData } from '../hooks/useFetchRegisterData';
+import { ErrorResponse } from '../model/error';
+import { OkResponse } from '../model/ok';
 
-const RegisterItemForm: FC = () => {
+type Props = {
+  setResult: Dispatch<SetStateAction<OkResponse | ErrorResponse | null>>;
+};
+
+const RegisterItemForm: FC<Props> = (props) => {
   const {
     register,
     handleSubmit,
@@ -14,35 +20,12 @@ const RegisterItemForm: FC = () => {
   } = useForm<RegisterItemSchemaType>({
     resolver: zodResolver(registerItemSchema),
   });
-  const onSubmit: SubmitHandler<RegisterItemSchemaType> = (data) => {
-    // conver from zod schema to api schema
-    const requestColor: string = data.color.map((color) => color.color).join('^');
-    const requestPurchaseYear: number | null = Number.isNaN(data.purchase_year) ? null : data.purchase_year;
-    const requestPurchasePrice: number | null = Number.isNaN(data.purchase_price) ? null : data.purchase_price;
-    const requestDurability: number | null = Number.isNaN(data.durability) ? null : data.durability;
-    const requestData: RegisterItemRequest = {
-      name: data.name,
-      visible_id: data.visible_id,
-      parent_visible_id: data.parent_visible_id,
-      product_number: data.product_number,
-      description: data.description,
-      purchase_year: requestPurchaseYear,
-      purchase_price: requestPurchasePrice,
-      durability: requestDurability,
-      is_depreciation: data.is_depreciation,
-      connector: data.connector.map((connector) => connector.connector),
-      color: requestColor,
-    };
-    console.debug('requestData');
-    console.info(requestData);
-    // send
-    fetch(`http://localhost:5000/api/item/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestData),
-    }).catch((err) => console.error(err));
+  const onSubmit: SubmitHandler<RegisterItemSchemaType> = async (data) => {
+    const result: ErrorResponse | OkResponse = await useFetchRegisterData(
+      data,
+      'http://localhost:5000/api/item/register'
+    );
+    props.setResult(result);
   };
   const connectorArray = useFieldArray({
     name: 'connector',

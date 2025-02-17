@@ -6,3 +6,6 @@ export { default as Update } from './routes/Update';
 export { default as IndividualItemResult } from './components/IndividualItemResult';
 export { default as RegisterItemForm } from './components/RegisterItemForm';
 export { default as UpdateItemForm } from './components/UpdateItemForm';
+export { default as Loading } from './components/Loading';
+export { default as SearchItemForm } from './components/SearchItemForm';
+export { default as SearchItemResult } from './components/SearchItemResult';
