@@ -1,5 +1,5 @@
-import { Controller, SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
-import { Color, registerItemSchema, RegisterItemSchemaType } from '../validation/registerItem';
+import { SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
+import { registerItemSchema, RegisterItemSchemaType } from '../validation/registerItem';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FC } from 'react';
 import { ErrorMessage } from '@hookform/error-message';

@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { searchItemSchema, SearchItemSchemaType } from '../validation/searchItem';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -49,18 +49,33 @@ const Home: FC = () => {
         <br />
         <input type="submit" value="検索" />
       </form>
+      <Link to="/register">新規登録</Link>
       <div>
-        {data?.search_items.map((item, index) => (
-          <div key={index}>
-            <h2>{item.name}</h2>
-            <p>{item.id}</p>
-            <p>{item.visible_id}</p>
-            <p>{item.connector.join(',')}</p>
-            <p>{item.color}</p>
-            <p>{item.is_rent ? 'レンタル不可' : 'レンタル可'}</p>
-            <a href={`/item/${item.id}`}>詳細</a>
-          </div>
-        ))}
+        {data?.search_items.map((item, index) =>
+          item.id === 1 ? (
+            // 筑波大学のレンタルを拒否
+            <div key={index}>
+              <h2>{item.name}</h2>
+              <p>{item.id}</p>
+              <p>{item.visible_id}</p>
+              <p>{item.connector.join(',')}</p>
+              <p>{item.color}</p>
+              <p>レンタル不可</p>
+              <Link to={`/item/${item.id}`}>詳細</Link>
+            </div>
+          ) : (
+            // それ以外
+            <div key={index}>
+              <h2>{item.name}</h2>
+              <p>{item.id}</p>
+              <p>{item.visible_id}</p>
+              <p>{item.connector.join(',')}</p>
+              <p>{item.color}</p>
+              <p>{item.is_rent ? 'レンタル不可' : 'レンタル可'}</p>
+              <Link to={`/item/${item.id}`}>詳細</Link>
+            </div>
+          )
+        )}
       </div>
     </div>
   );

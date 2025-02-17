@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { IndividualItemResult } from '..';
 
 const IndividualItem: FC = () => {
@@ -20,7 +20,10 @@ const IndividualItem: FC = () => {
           <p>idは数字でなければなりません。</p>
         </>
       ) : (
-        <IndividualItemResult id={itemId} />
+        <>
+          <Link to={`/item/${id}/update`}>更新</Link>
+          <IndividualItemResult id={itemId} />
+        </>
       )}
     </div>
   );
