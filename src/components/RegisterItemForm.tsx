@@ -1,5 +1,5 @@
 import { Controller, SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
-import { registerItemSchema, RegisterItemSchemaType } from '../validation/registerItem';
+import { Color, registerItemSchema, RegisterItemSchemaType } from '../validation/registerItem';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FC } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
@@ -74,27 +74,44 @@ const RegisterItemForm: FC = () => {
       <label htmlFor="connector">Connector: </label>
       {connectorArray.fields.map((field, index) => (
         <div key={field.id}>
-          <input id="connector" {...register(`connector.${index}.connector`)} />
+          <label htmlFor="connector">{index}</label>
+          <select id="connector" {...register(`connector.${index}.connector` as const)}>
+            <option value="USB">USB</option>
+            <option value="HDMI">HDMI</option>
+            <option value="VGA">VGA</option>
+            <option value="DVI">DVI</option>
+          </select>
           {index >= 0 && <input type="submit" value="✕" onClick={() => connectorArray.remove(index)} />}
         </div>
       ))}
       <br />
       <ErrorMessage errors={errors} name="connector" message={errors.connector?.message} />
       <br />
-      <input type="button" value="端子の追加" onClick={() => connectorArray.append({ connector: '' })} />
+      <input type="button" value="端子の追加" onClick={() => connectorArray.append({ connector: 'USB' })} />
       <br />
       <label htmlFor="color">Color: </label>
       {colorArray.fields.map((field, index) => (
         <div key={field.id}>
           <label htmlFor="color">{index}</label>
-          <input id="color" {...register(`color.${index}.color`)} />
+          <select id="color" {...register(`color.${index}.color`)}>
+            <option value="Red">Red</option>
+            <option value="Blue">Blue</option>
+            <option value="Green">Green</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Purple">Purple</option>
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Gray">Gray</option>
+            <option value="Brown">Brown</option>
+            <option value="Pink">Pink</option>
+          </select>
           {index >= 0 && <input type="submit" value="✕" onClick={() => colorArray.remove(index)} />}
         </div>
       ))}
       <br />
       <ErrorMessage errors={errors} name="color" message={errors.color?.message} />
       <br />
-      <input type="button" value="色の追加" onClick={() => colorArray.append({ color: '' })} />
+      <input type="button" value="色の追加" onClick={() => colorArray.append({ color: 'Black' })} />
       <br />
       <input type="submit" value="登録" />
     </form>

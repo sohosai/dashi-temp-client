@@ -4,6 +4,10 @@ import { z } from 'zod';
 const today = new Date();
 //NaNをnumberとして扱えるようにする
 const NaNSchema: z.ZodSchema<number> = z.any().refine(Number.isNaN);
+//Connectorで扱う端子のリスト
+export type Connector = 'USB' | 'HDMI' | 'VGA' | 'DVI';
+//Colorで扱う色のリスト
+export type Color = 'Red' | 'Blue' | 'Green' | 'Yellow' | 'Purple' | 'Black' | 'White' | 'Gray' | 'Brown' | 'Pink';
 
 const registerItemSchema = z.object({
   name: z.string().min(1, { message: '名前は、1文字以上入れてください。' }),
@@ -45,8 +49,8 @@ const registerItemSchema = z.object({
     })
     .nullable(),
   is_depreciation: z.boolean(),
-  connector: z.custom<{ connector: string }[]>(),
-  color: z.custom<{ color: string }[]>(),
+  connector: z.custom<{ connector: Connector }[]>(),
+  color: z.custom<{ color: Color }[]>(),
 });
 
 export { registerItemSchema };
