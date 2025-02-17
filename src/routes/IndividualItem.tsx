@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { IndividualItemResult, Loading } from '..';
 import { IndividualItemResponse } from '../model/individualItemResponse';

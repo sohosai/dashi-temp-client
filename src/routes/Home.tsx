@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { SearchItemsResponse } from '../model/searchItemResponse';
 import { useFetchSearchData } from '../hooks/useFetchSearchData';
 import { Loading, SearchItemForm, SearchItemResult } from '..';

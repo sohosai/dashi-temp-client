@@ -9,3 +9,4 @@ export { default as UpdateItemForm } from './components/UpdateItemForm';
 export { default as Loading } from './components/Loading';
 export { default as SearchItemForm } from './components/SearchItemForm';
 export { default as SearchItemResult } from './components/SearchItemResult';
+export { default as RegisterItemResult } from './components/RegisterItemResult';
