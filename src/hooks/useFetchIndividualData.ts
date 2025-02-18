@@ -13,9 +13,18 @@ export const useFetchIndividualData = (
         const data = await fetch(`http://localhost:5000/api/item/${id}`, { method: 'GET' })
           .then((res) => {
             if (res.status === 200) {
+              // 200 OK
               return res.json();
             } else {
-              return res.json();
+              try {
+                return res.json();
+              } catch (e) {
+                console.error(e);
+                return {
+                  code: 'individual-item/unknown-error',
+                  message: 'UnknownError: Something went wrong.',
+                };
+              }
             }
           })
           .catch((err) => console.error(err));

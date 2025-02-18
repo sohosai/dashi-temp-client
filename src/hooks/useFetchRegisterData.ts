@@ -35,9 +35,19 @@ export const useFetchRegisterData = async (
   })
     .then((res) => {
       if (res.status === 201) {
+        // 201 Created
         return 'ok';
       } else {
-        return res.json();
+        // error
+        try {
+          return res.json();
+        } catch (e) {
+          console.error(e);
+          return {
+            code: 'register-item/unknown-error',
+            message: 'UnknownError: Something went wrong.',
+          };
+        }
       }
     })
     .catch((e) => {

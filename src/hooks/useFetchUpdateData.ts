@@ -35,9 +35,19 @@ export const useFetchUpdateData = async (
   })
     .then((res) => {
       if (res.status === 200) {
+        // 200 OK
         return 'ok';
       } else {
-        return res.json();
+        // error
+        try {
+          return res.json();
+        } catch (e) {
+          console.error(e);
+          return {
+            code: 'update-item/unknown-error',
+            message: 'UnknownError: Something went wrong.',
+          };
+        }
       }
     })
     .catch((e) => {
