@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ErrorResponse } from '../model/error';
+import { ErrorResponse } from '../model/errorResponse';
 import { Pending } from '../model/pending';
 import { SearchItemsResponse } from '../model/searchItemResponse';
 
@@ -8,7 +8,10 @@ export const useFetchSearchData = (keywords: string): SearchItemsResponse | Erro
   useEffect(() => {
     const fetchData = async () => {
       if (keywords !== undefined && keywords !== '') {
-        const data = await fetch(`http://localhost:5000/api/item/search?keywords=${keywords}`, { method: 'GET' })
+        const data: SearchItemsResponse | ErrorResponse = await fetch(
+          `http://localhost:5000/api/item/search?keywords=${keywords}`,
+          { method: 'GET' }
+        )
           .then((res) => {
             if (res.status === 200) {
               // 200 OK

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ErrorResponse } from '../model/error';
+import { ErrorResponse } from '../model/errorResponse';
 import { Pending } from '../model/pending';
 import { IndividualItemResponse } from '../model/individualItemResponse';
 
@@ -10,7 +10,9 @@ export const useFetchIndividualData = (
   useEffect(() => {
     const fetchData = async () => {
       if (id !== undefined && parseInt(id) >= 1) {
-        const data = await fetch(`http://localhost:5000/api/item/${id}`, { method: 'GET' })
+        const data: IndividualItemResponse | ErrorResponse = await fetch(`http://localhost:5000/api/item/${id}`, {
+          method: 'GET',
+        })
           .then((res) => {
             if (res.status === 200) {
               // 200 OK
