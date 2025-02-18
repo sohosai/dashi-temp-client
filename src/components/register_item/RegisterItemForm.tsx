@@ -4,8 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
 import { useFetchRegisterData } from '../../hooks/useFetchRegisterData';
-import { ErrorResponse } from '../../model/error';
-import { OkResponse } from '../../model/ok';
+import { ErrorResponse } from '../../model/errorResponse';
+import { OkResponse } from '../../model/okResponse';
 import { Pending } from '../../model/pending';
 
 type Props = {
@@ -23,10 +23,7 @@ const RegisterItemForm: FC<Props> = (props) => {
   });
   const onSubmit: SubmitHandler<RegisterItemSchemaType> = async (data) => {
     props.setResult('pending');
-    const result: ErrorResponse | OkResponse = await useFetchRegisterData(
-      data,
-      'http://localhost:5000/api/item/register'
-    );
+    const result: ErrorResponse | OkResponse = await useFetchRegisterData(data);
     props.setResult(result);
   };
   const connectorArray = useFieldArray({

@@ -1,12 +1,9 @@
-import { ErrorResponse } from '../model/error';
+import { ErrorResponse } from '../model/errorResponse';
 import { RegisterItemRequest } from '../model/registerItemRequest';
 import { RegisterItemSchemaType } from '../validation/registerItem';
-import { OkResponse } from '../model/ok';
+import { OkResponse } from '../model/okResponse';
 
-export const useFetchRegisterData = async (
-  data: RegisterItemSchemaType,
-  endpoint: string
-): Promise<ErrorResponse | 'ok'> => {
+export const useFetchRegisterData = async (data: RegisterItemSchemaType): Promise<OkResponse | ErrorResponse> => {
   // conver from zod schema to api schema
   const requestColor: string = data.color.map((color) => color.color).join('^');
   const requestPurchaseYear: number | null = Number.isNaN(data.purchase_year) ? null : data.purchase_year;
@@ -26,7 +23,7 @@ export const useFetchRegisterData = async (
     color: requestColor,
   };
   // send
-  const result: ErrorResponse | OkResponse = await fetch(endpoint, {
+  const result: OkResponse | ErrorResponse = await fetch('http://localhost:5000/api/item/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
