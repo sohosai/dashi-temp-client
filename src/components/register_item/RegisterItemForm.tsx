@@ -21,9 +21,9 @@ const RegisterItemForm: FC<Props> = (props) => {
   } = useForm<RegisterItemSchemaType>({
     resolver: zodResolver(registerItemSchema),
   });
-  const onSubmit: SubmitHandler<RegisterItemSchemaType> = async (data) => {
+  const onSubmit: SubmitHandler<RegisterItemSchemaType> = async (formData) => {
     props.setResult('pending');
-    const result: ErrorResponse | OkResponse = await useFetchRegisterData(data);
+    const result: ErrorResponse | OkResponse = await useFetchRegisterData(formData);
     props.setResult(result);
   };
   const connectorArray = useFieldArray({

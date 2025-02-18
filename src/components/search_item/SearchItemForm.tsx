@@ -23,8 +23,8 @@ const SearchItemForm: FC<Props> = (props) => {
     },
   });
   // update url
-  const onSubmit: SubmitHandler<SearchItemSchemaType> = (data) => {
-    navigate(`?keywords=${data.keywords}`);
+  const onSubmit: SubmitHandler<SearchItemSchemaType> = (formData) => {
+    navigate(`?keywords=${formData.keywords}`);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

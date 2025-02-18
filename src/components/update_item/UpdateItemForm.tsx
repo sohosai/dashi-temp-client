@@ -37,9 +37,9 @@ const UpdateItemForm: FC<Props> = (props) => {
     },
   });
 
-  const onSubmit: SubmitHandler<UpdateItemSchemaType> = async (data) => {
+  const onSubmit: SubmitHandler<UpdateItemSchemaType> = async (formData) => {
     props.setResult('pending');
-    const result: ErrorResponse | OkResponse = await useFetchUpdateData(data, props.individualItem.id);
+    const result: ErrorResponse | OkResponse = await useFetchUpdateData(formData, props.individualItem.id);
     props.setResult(result);
   };
 
