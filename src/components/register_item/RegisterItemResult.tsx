@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { OkResponse } from '../../model/ok';
+import { OkResponse } from '../../model/okResponse';
 import { Link } from 'react-router-dom';
-import { ErrorResponse } from '../../model/error';
+import { ErrorResponse } from '../../model/errorResponse';
 
 type Props = {
   result: OkResponse | ErrorResponse;
