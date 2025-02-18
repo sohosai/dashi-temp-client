@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { IndividualItemResponse } from '../../model/individualItemResponse';
-import { ErrorResponse } from '../../model/error';
+import { ErrorResponse } from '../../model/errorResponse';
 import { Pending } from '../../model/pending';
 import { useFetchIndividualData } from '../../hooks/useFetchIndividualData';
-import { OkResponse } from '../../model/ok';
+import { OkResponse } from '../../model/okResponse';
 import UpdateItemResult from '../../components/update_item/UpdateItemResult';
 import { Loading, UpdateItemForm } from '../../components';
 
@@ -34,7 +34,7 @@ const UpdateItem: FC = () => {
             // fetch成功 (formを表示)
             <>
               {result === null ? (
-                // 処理中
+                // 初期表示
                 <UpdateItemForm individualItem={individualItem} setResult={setResult} />
               ) : result === 'pending' ? (
                 // 処理中

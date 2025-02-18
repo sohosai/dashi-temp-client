@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { Loading, RegisterItemForm } from '../../components';
-import { ErrorResponse } from '../../model/error';
-import { OkResponse } from '../../model/ok';
+import { ErrorResponse } from '../../model/errorResponse';
+import { OkResponse } from '../../model/okResponse';
 import RegisterItemResult from '../../components/register_item/RegisterItemResult';
 import { Pending } from '../../model/pending';
 
@@ -11,7 +11,7 @@ const Register: FC = () => {
     <>
       <h1>Register</h1>
       {result === null ? (
-        // 処理中
+        // 初期表示
         <RegisterItemForm setResult={setResult} />
       ) : result === 'pending' ? (
         // 処理中

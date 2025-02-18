@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
 import { SearchItemsResponse } from '../../model/searchItemResponse';
 import { useFetchSearchData } from '../../hooks/useFetchSearchData';
-import { ErrorResponse } from '../../model/error';
+import { ErrorResponse } from '../../model/errorResponse';
 import { Pending } from '../../model/pending';
 import { Loading, SearchItemForm, SearchItemResult } from '../../components';
 
