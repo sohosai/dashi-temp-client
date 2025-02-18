@@ -1,13 +1,13 @@
 import { Dispatch, FC, SetStateAction } from 'react';
-import { IndividualItemResponse } from '../model/individualItemResponse';
-import { ErrorResponse } from '../model/error';
-import { updateItemSchema, UpdateItemSchemaType } from '../validation/updateItem';
+import { IndividualItemResponse } from '../../model/individualItemResponse';
+import { ErrorResponse } from '../../model/error';
+import { updateItemSchema, UpdateItemSchemaType } from '../../validation/updateItem';
 import { ErrorMessage } from '@hookform/error-message';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
-import { OkResponse } from '../model/ok';
-import { Pending } from '../model/pending';
-import { useFetchUpdateData } from '../hooks/useFetchUpdateData';
+import { OkResponse } from '../../model/ok';
+import { Pending } from '../../model/pending';
+import { useFetchUpdateData } from '../../hooks/useFetchUpdateData';
 
 type Props = {
   individualItem: IndividualItemResponse;

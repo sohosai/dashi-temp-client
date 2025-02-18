@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IndividualItemResponse } from '../model/individualItemResponse';
+import { IndividualItemResponse } from '../../model/individualItemResponse';
 
 type Props = {
   result: IndividualItemResponse;

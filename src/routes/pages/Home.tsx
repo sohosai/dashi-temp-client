@@ -1,10 +1,10 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
-import { SearchItemsResponse } from '../model/searchItemResponse';
-import { useFetchSearchData } from '../hooks/useFetchSearchData';
-import { Loading, SearchItemForm, SearchItemResult } from '..';
-import { ErrorResponse } from '../model/error';
-import { Pending } from '../model/pending';
+import { SearchItemsResponse } from '../../model/searchItemResponse';
+import { useFetchSearchData } from '../../hooks/useFetchSearchData';
+import { ErrorResponse } from '../../model/error';
+import { Pending } from '../../model/pending';
+import { Loading, SearchItemForm, SearchItemResult } from '../../components';
 
 const Home: FC = () => {
   const location = useLocation();
@@ -15,6 +15,7 @@ const Home: FC = () => {
   return (
     <>
       <SearchItemForm keywords={keywords} />
+      <Link to="/register">Register</Link>
       {keywords === '' ? (
         // 検索欄が空
         <></>

@@ -1,12 +1,12 @@
 import { SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
-import { registerItemSchema, RegisterItemSchemaType } from '../validation/registerItem';
+import { registerItemSchema, RegisterItemSchemaType } from '../../validation/registerItem';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
-import { useFetchRegisterData } from '../hooks/useFetchRegisterData';
-import { ErrorResponse } from '../model/error';
-import { OkResponse } from '../model/ok';
-import { Pending } from '../model/pending';
+import { useFetchRegisterData } from '../../hooks/useFetchRegisterData';
+import { ErrorResponse } from '../../model/error';
+import { OkResponse } from '../../model/ok';
+import { Pending } from '../../model/pending';
 
 type Props = {
   setResult: Dispatch<SetStateAction<OkResponse | ErrorResponse | Pending | null>>;

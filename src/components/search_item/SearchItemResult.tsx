@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { SearchItemsResponse } from '../model/searchItemResponse';
+import { SearchItemsResponse } from '../../model/searchItemResponse';
 import { Link } from 'react-router-dom';
 
 type Props = {

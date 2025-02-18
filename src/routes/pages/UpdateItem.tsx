@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { IndividualItemResponse } from '../model/individualItemResponse';
-import { ErrorResponse } from '../model/error';
-import { Pending } from '../model/pending';
-import { useFetchIndividualData } from '../hooks/useFetchIndividualData';
-import { Loading, UpdateItemForm } from '..';
-import { OkResponse } from '../model/ok';
-import UpdateItemResult from '../components/UpdateItemResult';
+import { IndividualItemResponse } from '../../model/individualItemResponse';
+import { ErrorResponse } from '../../model/error';
+import { Pending } from '../../model/pending';
+import { useFetchIndividualData } from '../../hooks/useFetchIndividualData';
+import { OkResponse } from '../../model/ok';
+import UpdateItemResult from '../../components/update_item/UpdateItemResult';
+import { Loading, UpdateItemForm } from '../../components';
 
 const UpdateItem: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +17,7 @@ const UpdateItem: FC = () => {
     <>
       {typeof id === 'undefined' ? (
         // 発生しないはず
-        <></>
+        <h2>Unexpected Error</h2>
       ) : (
         <>
           {individualItem === null || individualItem === 'pending' ? (
@@ -39,16 +39,9 @@ const UpdateItem: FC = () => {
               ) : result === 'pending' ? (
                 // 処理中
                 <Loading />
-              ) : result === 'ok' ? (
-                // fetch成功
-                <UpdateItemResult result={result} />
               ) : (
-                // fetchに失敗
-                <>
-                  <p>{result.code}</p>
-                  <p>{result.message}</p>
-                  <Link to="/">Home</Link>
-                </>
+                // fetch結果
+                <UpdateItemResult result={result} />
               )}
             </>
           )}

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { searchItemSchema, SearchItemSchemaType } from '../validation/searchItem';
+import { searchItemSchema, SearchItemSchemaType } from '../../validation/searchItem';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FC } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
