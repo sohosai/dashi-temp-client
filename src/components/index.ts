@@ -6,3 +6,5 @@ export { default as SearchItemForm } from './search_item/SearchItemForm';
 export { default as SearchItemResult } from './search_item/SearchItemResult';
 export { default as UpdateItemForm } from './update_item/UpdateItemForm';
 export { default as UpdateItemResult } from './update_item/UpdateItemResult';
+export { default as DeleteItemButton } from './delete_item/DeleteItemButton';
+export { default as DeleteItemResult } from './delete_item/DeleteItemResult';
