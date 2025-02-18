@@ -1,11 +1,11 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { IndividualItemResponse } from '../../model/individualItemResponse';
-import { ErrorResponse } from '../../model/error';
+import { ErrorResponse } from '../../model/errorResponse';
 import { updateItemSchema, UpdateItemSchemaType } from '../../validation/updateItem';
 import { ErrorMessage } from '@hookform/error-message';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
-import { OkResponse } from '../../model/ok';
+import { OkResponse } from '../../model/okResponse';
 import { Pending } from '../../model/pending';
 import { useFetchUpdateData } from '../../hooks/useFetchUpdateData';
 
@@ -39,10 +39,7 @@ const UpdateItemForm: FC<Props> = (props) => {
 
   const onSubmit: SubmitHandler<UpdateItemSchemaType> = async (data) => {
     props.setResult('pending');
-    const result: ErrorResponse | OkResponse = await useFetchUpdateData(
-      data,
-      `http://localhost:5000/api/item/update/${props.individualItem.id}`
-    );
+    const result: ErrorResponse | OkResponse = await useFetchUpdateData(data, props.individualItem.id);
     props.setResult(result);
   };
 

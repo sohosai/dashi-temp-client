@@ -1,12 +1,12 @@
-import { ErrorResponse } from '../model/error';
-import { OkResponse } from '../model/ok';
+import { ErrorResponse } from '../model/errorResponse';
+import { OkResponse } from '../model/okResponse';
 import { UpdateItemRequest } from '../model/updateItemRequest';
 import { UpdateItemSchemaType } from '../validation/updateItem';
 
 export const useFetchUpdateData = async (
   data: UpdateItemSchemaType,
-  endpoint: string
-): Promise<ErrorResponse | 'ok'> => {
+  id: number
+): Promise<OkResponse | ErrorResponse> => {
   // conver from zod schema to api schema
   const requestPurchaseYear: number | null = Number.isNaN(data.purchase_year) ? null : data.purchase_year;
   const requestPurchasePrice: number | null = Number.isNaN(data.purchase_price) ? null : data.purchase_price;
@@ -26,7 +26,7 @@ export const useFetchUpdateData = async (
     color: requestColor,
   };
   // send
-  const result: ErrorResponse | OkResponse = await fetch(endpoint, {
+  const result: ErrorResponse | OkResponse = await fetch(`http://localhost:5000/api/item/update/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
