@@ -13,14 +13,14 @@ type Props = {
 
 ReactModal.setAppElement('#root');
 
-const DeleteItemModal: FC<Props> = (props) => {
+const DeleteItem: FC<Props> = (props) => {
   // set modal state
   const [modalIsOpen, setIsOpen] = useState<boolean>(false);
   // set delete result
   const [result, setResult] = useState<OkResponse | ErrorResponse | Pending | null>(null);
   return (
     <>
-      <DeleteItemButton id={props.id} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} setResult={setResult} />
+      <DeleteItemButton id={props.id} setIsOpen={setIsOpen} setResult={setResult} />
       <ReactModal
         isOpen={modalIsOpen}
         contentLabel="Modal2"
@@ -55,4 +55,4 @@ const DeleteItemModal: FC<Props> = (props) => {
   );
 };
 
-export default DeleteItemModal;
+export default DeleteItem;

@@ -1,16 +1,18 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { searchItemSchema, SearchItemSchemaType } from '../../validation/searchItem';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FC, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
 import { SearchItemsResponse } from '../../model/searchItemResponse';
 import { ErrorResponse } from '../../model/errorResponse';
 import { Pending } from '../../model/pending';
-import { TransferSearchItemResult } from '..';
 import { useFetchSearchParentData } from '../../hooks/useFetchSearchParentData';
+import { OkResponse } from '../../model/okResponse';
+import TransferSearchItemResult from './TransferSearchItemResult';
 
 type Props = {
   id: string;
+  setTransferResult: Dispatch<SetStateAction<OkResponse | ErrorResponse | Pending | null>>;
 };
 
 const TransferSearchItemForm: FC<Props> = (props) => {
@@ -46,7 +48,12 @@ const TransferSearchItemForm: FC<Props> = (props) => {
         <input type="submit" value="検索" />
       </form>
       {/* result */}
-      <TransferSearchItemResult keywords={keywords} result={searchResult} id={props.id} />
+      <TransferSearchItemResult
+        keywords={keywords}
+        result={searchResult}
+        id={props.id}
+        setTransferResult={props.setTransferResult}
+      />
     </>
   );
 };

@@ -6,16 +6,15 @@ import { useFetchDeleteData } from '../../hooks/useFetchDeleteData';
 
 type Props = {
   id: string;
-  modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   setResult: Dispatch<SetStateAction<OkResponse | ErrorResponse | Pending | null>>;
 };
 
 const DeleteItemButton: FC<Props> = (props) => {
-  const handleClick = async () => {
-    props.setIsOpen(!props.modalIsOpen);
+  const handleClick = async (): Promise<void> => {
+    props.setIsOpen(true);
     props.setResult('pending');
-    const result = await useFetchDeleteData(parseInt(props.id));
+    const result: OkResponse | ErrorResponse = await useFetchDeleteData(parseInt(props.id));
     props.setResult(result);
   };
   return <button onClick={handleClick}>Delete</button>;

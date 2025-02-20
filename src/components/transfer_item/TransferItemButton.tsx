@@ -11,9 +11,9 @@ type Props = {
 };
 
 const DeleteItemButton: FC<Props> = (props) => {
-  const handleClick = async () => {
+  const handleClick = async (): Promise<void> => {
     props.setResult('pending');
-    const result = await useFetchTransferData(parseInt(props.id), props.parent_id);
+    const result: OkResponse | ErrorResponse = await useFetchTransferData(parseInt(props.id), props.parent_id);
     props.setResult(result);
   };
   return <button onClick={handleClick}>Move</button>;

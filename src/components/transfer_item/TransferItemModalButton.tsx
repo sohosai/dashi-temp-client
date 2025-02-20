@@ -6,7 +6,7 @@ type Props = {
 };
 
 const TransferItemModalButton: FC<Props> = (props) => {
-  const handleClick = async () => {
+  const handleClick = async (): Promise<void> => {
     props.setIsOpen(!props.modalIsOpen);
   };
   return <button onClick={handleClick}>Move</button>;
