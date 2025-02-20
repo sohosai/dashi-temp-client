@@ -22,14 +22,8 @@ const Home: FC = () => {
       ) : result === null || result === 'pending' ? (
         // 処理中
         <Loading />
-      ) : 'code' in result && 'message' in result ? (
-        // fetchに失敗
-        <>
-          <p>{result.code}</p>
-          <p>{result.message}</p>
-        </>
       ) : (
-        // fetch成功
+        // fetch結果
         <SearchItemResult result={result} />
       )}
     </>

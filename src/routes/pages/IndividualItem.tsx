@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { DeleteItem, IndividualItemResult, Loading, TransferItem } from '../../components';
+import { DeleteItem, ErrorResult, IndividualItemResult, Loading, TransferItem } from '../../components';
 import { IndividualItemResponse } from '../../model/individualItemResponse';
 import { Pending } from '../../model/pending';
 import { ErrorResponse } from '../../model/errorResponse';
@@ -22,11 +22,7 @@ const IndividualItem: FC = () => {
             <Loading />
           ) : 'code' in result && 'message' in result ? (
             // fetchに失敗
-            <>
-              <p>{result.code}</p>
-              <p>{result.message}</p>
-              <Link to={`/`}>Home</Link>
-            </>
+            <ErrorResult result={result} />
           ) : (
             // fetch成功
             <>
