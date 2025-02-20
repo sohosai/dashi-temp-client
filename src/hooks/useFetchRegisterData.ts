@@ -49,6 +49,10 @@ export const useFetchRegisterData = async (data: RegisterItemSchemaType): Promis
     })
     .catch((e) => {
       console.error(e);
+      return {
+        code: 'register-item/unknown-error',
+        message: 'UnknownError: Something went wrong.',
+      };
     });
   return result;
 };

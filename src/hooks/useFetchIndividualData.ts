@@ -29,7 +29,13 @@ export const useFetchIndividualData = (
               }
             }
           })
-          .catch((err) => console.error(err));
+          .catch((err) => {
+            console.error(err);
+            return {
+              code: 'search-item/unknown-error',
+              message: 'UnknownError: Something went wrong.',
+            };
+          });
         setResult(data);
       } else {
         setResult({

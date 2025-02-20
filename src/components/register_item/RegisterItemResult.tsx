@@ -1,29 +1,15 @@
 import { FC } from 'react';
 import { OkResponse } from '../../model/okResponse';
-import { Link } from 'react-router-dom';
 import { ErrorResponse } from '../../model/errorResponse';
+import ErrorResult from '../error/ErrorResult';
+import OkResult from '../ok/OkResult';
 
 type Props = {
   result: OkResponse | ErrorResponse;
 };
 
 const RegisterItemResult: FC<Props> = (props) => {
-  return (
-    <>
-      {props.result == 'ok' ? (
-        <>
-          <p>{props.result}</p>
-          <Link to="/">Home</Link>
-        </>
-      ) : (
-        <>
-          <p>{props.result.code}</p>
-          <p>{props.result.message}</p>
-          <Link to="/">Home</Link>
-        </>
-      )}
-    </>
-  );
+  return <>{props.result == 'ok' ? <OkResult result={props.result} /> : <ErrorResult result={props.result} />}</>;
 };
 
 export default RegisterItemResult;

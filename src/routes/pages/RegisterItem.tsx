@@ -1,11 +1,10 @@
 import { FC, useState } from 'react';
-import { Loading, RegisterItemForm } from '../../components';
+import { Loading, RegisterItemForm, RegisterItemResult } from '../../components';
 import { ErrorResponse } from '../../model/errorResponse';
 import { OkResponse } from '../../model/okResponse';
-import RegisterItemResult from '../../components/register_item/RegisterItemResult';
 import { Pending } from '../../model/pending';
 
-const Register: FC = () => {
+const RegisterItem: FC = () => {
   const [result, setResult] = useState<OkResponse | ErrorResponse | Pending | null>(null);
   return (
     <>
@@ -24,4 +23,4 @@ const Register: FC = () => {
   );
 };
 
-export default Register;
+export default RegisterItem;

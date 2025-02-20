@@ -29,7 +29,13 @@ export const useFetchSearchData = (keywords: string): SearchItemsResponse | Erro
               }
             }
           })
-          .catch((e) => console.error(e));
+          .catch((e) => {
+            console.error(e);
+            return {
+              code: 'search-item/unknown-error',
+              message: 'UnknownError: Something went wrong.',
+            };
+          });
         setResult(data);
       }
     };

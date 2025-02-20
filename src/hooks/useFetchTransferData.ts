@@ -1,10 +1,19 @@
 import { ErrorResponse } from '../model/errorResponse';
 import { OkResponse } from '../model/okResponse';
+import { TransferItemRequest } from '../model/transferItemRequest';
 
-export const useFetchDeleteData = async (id: number): Promise<OkResponse | ErrorResponse> => {
+export const useFetchTransferData = async (id: number, parent_id: number): Promise<OkResponse | ErrorResponse> => {
+  const requestData: TransferItemRequest = {
+    id: id,
+    new_parent_id: parent_id,
+  };
   // send
-  const result: OkResponse | ErrorResponse = await fetch(`http://localhost:5000/api/item/delete/${id}`, {
-    method: 'DELETE',
+  const result: OkResponse | ErrorResponse = await fetch(`http://localhost:5000/api/item/transfer`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestData),
   })
     .then((res) => {
       if (res.status === 200) {
@@ -17,7 +26,7 @@ export const useFetchDeleteData = async (id: number): Promise<OkResponse | Error
         } catch (e) {
           console.error(e);
           return {
-            code: 'delete-item/unknown-error',
+            code: 'transfer-item/unknown-error',
             message: 'UnknownError: Something went wrong.',
           };
         }
@@ -26,7 +35,7 @@ export const useFetchDeleteData = async (id: number): Promise<OkResponse | Error
     .catch((e) => {
       console.error(e);
       return {
-        code: 'search-item/unknown-error',
+        code: 'transfer-item/unknown-error',
         message: 'UnknownError: Something went wrong.',
       };
     });
