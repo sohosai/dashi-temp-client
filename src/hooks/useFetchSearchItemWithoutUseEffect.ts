@@ -4,7 +4,7 @@ import { SearchItemsResponse } from '../model/searchItemResponse';
 
 export const useFetchSearchItemWithoutUseEffect = async (
   keywords: string
-): Promise<SearchItemsResponse | ErrorResponse | 'pending' | null> => {
+): Promise<SearchItemsResponse | ErrorResponse | Pending | null> => {
   let result: SearchItemsResponse | ErrorResponse | Pending | null = null;
 
   if (keywords !== undefined && keywords !== '') {
