@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import ExcelJS from 'exceljs';
 
-const DepreiationCsvButton: FC = () => {
+const ItemCsvButton: FC = () => {
   const handlerClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const filename: string = 'sample.csv';
@@ -56,4 +56,4 @@ const DepreiationCsvButton: FC = () => {
   return <button onClick={(e) => handlerClick(e)}>CSV形式 (UTF8)</button>;
 };
 
-export default DepreiationCsvButton;
+export default ItemCsvButton;
