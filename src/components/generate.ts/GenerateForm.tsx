@@ -7,9 +7,11 @@ import { useFetchGenerate } from '../../hooks/useFetchGenerate';
 import { ErrorResponse } from '../../model/errorResponse';
 import { Pending } from '../../model/pending';
 import { GenerateResponse } from '../../model/generateResponse';
+import { Record } from '../../model/generateRequest';
 
 type Props = {
   setResult: Dispatch<SetStateAction<GenerateResponse | ErrorResponse | Pending | null>>;
+  setRecordType: Dispatch<SetStateAction<Record | null>>;
 };
 
 const GenerateForm: FC<Props> = (props) => {
@@ -21,7 +23,7 @@ const GenerateForm: FC<Props> = (props) => {
   } = useForm<GenerateSchemaType>({
     resolver: zodResolver(generateSchema),
     defaultValues: {
-      quantity: 10,
+      quantity: 49,
       record: 'Qr',
     },
   });
@@ -29,12 +31,13 @@ const GenerateForm: FC<Props> = (props) => {
   const onSubmit: SubmitHandler<GenerateSchemaType> = async (formData) => {
     props.setResult('pending');
     const result: GenerateResponse | ErrorResponse = await useFetchGenerate(formData.quantity, formData.record);
+    props.setRecordType(formData.record);
     props.setResult(result);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="quantity">Quantity: </label>
-      <input id="quantity" type="text" {...register('quantity')} />
+      <input id="quantity" type="number" {...register('quantity')} />
       <br />
       <ErrorMessage errors={errors} name="quantity" message={errors.quantity?.message} />
       <br />
