@@ -32,7 +32,7 @@ export const useFetchIndividualData = (
           .catch((err) => {
             console.error(err);
             return {
-              code: 'search-item/unknown-error',
+              code: 'inidividual-item/unknown-error',
               message: 'UnknownError: Something went wrong.',
             };
           });

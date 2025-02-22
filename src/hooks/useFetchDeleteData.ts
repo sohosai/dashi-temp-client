@@ -26,7 +26,7 @@ export const useFetchDeleteData = async (id: number): Promise<OkResponse | Error
     .catch((e) => {
       console.error(e);
       return {
-        code: 'search-item/unknown-error',
+        code: 'delete-item/unknown-error',
         message: 'UnknownError: Something went wrong.',
       };
     });

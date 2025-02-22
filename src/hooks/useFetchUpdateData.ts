@@ -53,7 +53,7 @@ export const useFetchUpdateData = async (
     .catch((e) => {
       console.error(e);
       return {
-        code: 'search-item/unknown-error',
+        code: 'update-item/unknown-error',
         message: 'UnknownError: Something went wrong.',
       };
     });

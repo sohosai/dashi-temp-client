@@ -29,10 +29,8 @@ const IndividualItem: FC = () => {
               <Link to={`/item/${id}/update`}>更新リンク</Link>
               <IndividualItemResult result={result} />
               {/*Transfer*/}
-              <h1>Transfer</h1>
               <TransferItem id={id} />
               {/*Delete*/}
-              <h1>Delete</h1>
               <DeleteItem id={id} />
             </>
           )}
