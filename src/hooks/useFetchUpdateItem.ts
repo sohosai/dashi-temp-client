@@ -3,7 +3,7 @@ import { OkResponse } from '../model/okResponse';
 import { UpdateItemRequest } from '../model/updateItemRequest';
 import { UpdateItemSchemaType } from '../validation/updateItem';
 
-export const useFetchUpdateData = async (
+export const useFetchUpdateItem = async (
   data: UpdateItemSchemaType,
   id: number
 ): Promise<OkResponse | ErrorResponse> => {
