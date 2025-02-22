@@ -2,7 +2,7 @@ import { ErrorResponse } from '../model/errorResponse';
 import { Pending } from '../model/pending';
 import { SearchItemsResponse } from '../model/searchItemResponse';
 
-export const useFetchSearchParentData = async (
+export const useFetchSearchItemWithoutUseEffect = async (
   keywords: string
 ): Promise<SearchItemsResponse | ErrorResponse | 'pending' | null> => {
   let result: SearchItemsResponse | ErrorResponse | Pending | null = null;

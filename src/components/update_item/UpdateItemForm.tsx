@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { OkResponse } from '../../model/okResponse';
 import { Pending } from '../../model/pending';
-import { useFetchUpdateData } from '../../hooks/useFetchUpdateData';
+import { useFetchUpdateItem } from '../../hooks/useFetchUpdateItem';
 
 type Props = {
   individualItem: IndividualItemResponse;
@@ -39,7 +39,7 @@ const UpdateItemForm: FC<Props> = (props) => {
 
   const onSubmit: SubmitHandler<UpdateItemSchemaType> = async (formData) => {
     props.setResult('pending');
-    const result: ErrorResponse | OkResponse = await useFetchUpdateData(formData, props.individualItem.id);
+    const result: ErrorResponse | OkResponse = await useFetchUpdateItem(formData, props.individualItem.id);
     props.setResult(result);
   };
 

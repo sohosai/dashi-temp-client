@@ -6,7 +6,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { SearchItemsResponse } from '../../model/searchItemResponse';
 import { ErrorResponse } from '../../model/errorResponse';
 import { Pending } from '../../model/pending';
-import { useFetchSearchParentData } from '../../hooks/useFetchSearchParentData';
+import { useFetchSearchItemWithoutUseEffect } from '../../hooks/useFetchSearchItemWithoutUseEffect';
 import { OkResponse } from '../../model/okResponse';
 import TransferSearchItemResult from './TransferSearchItemResult';
 
@@ -31,7 +31,7 @@ const TransferSearchItemForm: FC<Props> = (props) => {
   // update url
   const onSubmit: SubmitHandler<SearchItemSchemaType> = async (formData) => {
     setKeywords(formData.keywords);
-    const data: SearchItemsResponse | ErrorResponse | Pending | null = await useFetchSearchParentData(
+    const data: SearchItemsResponse | ErrorResponse | Pending | null = await useFetchSearchItemWithoutUseEffect(
       formData.keywords
     );
     setSearchResult(data);

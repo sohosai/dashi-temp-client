@@ -3,7 +3,7 @@ import { ErrorResponse } from '../model/errorResponse';
 import { Pending } from '../model/pending';
 import { IndividualItemResponse } from '../model/individualItemResponse';
 
-export const useFetchIndividualData = (
+export const useFetchIndividualItem = (
   id: string | undefined
 ): IndividualItemResponse | ErrorResponse | Pending | null => {
   const [result, setResult] = useState<IndividualItemResponse | ErrorResponse | Pending | null>(null);

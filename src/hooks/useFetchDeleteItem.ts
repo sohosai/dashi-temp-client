@@ -1,7 +1,7 @@
 import { ErrorResponse } from '../model/errorResponse';
 import { OkResponse } from '../model/okResponse';
 
-export const useFetchDeleteData = async (id: number): Promise<OkResponse | ErrorResponse> => {
+export const useFetchDeleteItem = async (id: number): Promise<OkResponse | ErrorResponse> => {
   // send
   const result: OkResponse | ErrorResponse = await fetch(`http://localhost:5000/api/item/delete/${id}`, {
     method: 'DELETE',

@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { IndividualItemResponse } from '../../model/individualItemResponse';
 import { ErrorResponse } from '../../model/errorResponse';
 import { Pending } from '../../model/pending';
-import { useFetchIndividualData } from '../../hooks/useFetchIndividualData';
+import { useFetchIndividualItem } from '../../hooks/useFetchIndividualItem';
 import { OkResponse } from '../../model/okResponse';
 import UpdateItemResult from '../../components/update_item/UpdateItemResult';
 import { Loading, UpdateItemForm } from '../../components';
@@ -12,7 +12,7 @@ const UpdateItem: FC = () => {
   const { id } = useParams<{ id: string }>();
   const [result, setResult] = useState<OkResponse | ErrorResponse | Pending | null>(null);
   // get individual item result
-  const individualItem: IndividualItemResponse | ErrorResponse | Pending | null = useFetchIndividualData(id);
+  const individualItem: IndividualItemResponse | ErrorResponse | Pending | null = useFetchIndividualItem(id);
   return (
     <>
       {typeof id === 'undefined' ? (

@@ -3,7 +3,7 @@ import { RegisterItemRequest } from '../model/registerItemRequest';
 import { RegisterItemSchemaType } from '../validation/registerItem';
 import { OkResponse } from '../model/okResponse';
 
-export const useFetchRegisterData = async (data: RegisterItemSchemaType): Promise<OkResponse | ErrorResponse> => {
+export const useFetchRegisterItem = async (data: RegisterItemSchemaType): Promise<OkResponse | ErrorResponse> => {
   // conver from zod schema to api schema
   const requestColor: string = data.color.map((color) => color.color).join('^');
   const requestPurchaseYear: number | null = Number.isNaN(data.purchase_year) ? null : data.purchase_year;

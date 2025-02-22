@@ -2,7 +2,7 @@ import { ErrorResponse } from '../model/errorResponse';
 import { OkResponse } from '../model/okResponse';
 import { TransferItemRequest } from '../model/transferItemRequest';
 
-export const useFetchTransferData = async (id: number, parent_id: number): Promise<OkResponse | ErrorResponse> => {
+export const useFetchTransferItem = async (id: number, parent_id: number): Promise<OkResponse | ErrorResponse> => {
   const requestData: TransferItemRequest = {
     id: id,
     new_parent_id: parent_id,

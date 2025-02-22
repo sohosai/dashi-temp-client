@@ -4,12 +4,12 @@ import { DeleteItem, ErrorResult, IndividualItemResult, Loading, TransferItem } 
 import { IndividualItemResponse } from '../../model/individualItemResponse';
 import { Pending } from '../../model/pending';
 import { ErrorResponse } from '../../model/errorResponse';
-import { useFetchIndividualData } from '../../hooks/useFetchIndividualData';
+import { useFetchIndividualItem } from '../../hooks/useFetchIndividualItem';
 
 const IndividualItem: FC = () => {
   const { id } = useParams<{ id: string }>();
   // get individual item result
-  const result: IndividualItemResponse | ErrorResponse | Pending | null = useFetchIndividualData(id);
+  const result: IndividualItemResponse | ErrorResponse | Pending | null = useFetchIndividualItem(id);
   return (
     <>
       {typeof id === 'undefined' ? (

@@ -3,7 +3,9 @@ import { ErrorResponse } from '../model/errorResponse';
 import { Pending } from '../model/pending';
 import { SearchItemsResponse } from '../model/searchItemResponse';
 
-export const useFetchSearchData = (keywords: string): SearchItemsResponse | ErrorResponse | Pending | null => {
+export const useFetchSearchItemWithUseEffect = (
+  keywords: string
+): SearchItemsResponse | ErrorResponse | Pending | null => {
   const [result, setResult] = useState<SearchItemsResponse | ErrorResponse | Pending | null>(null);
   useEffect(() => {
     const fetchData = async () => {
