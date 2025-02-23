@@ -1,11 +1,11 @@
 import { ErrorResponse } from '../model/errorResponse';
 import { RegisterItemRequest } from '../model/registerItemRequest';
-import { RegisterItemSchemaType } from '../validation/registerItem';
+import { Color, Connector, RegisterItemSchemaType } from '../validation/registerItem';
 import { OkResponse } from '../model/okResponse';
 
 export const useFetchRegisterItem = async (data: RegisterItemSchemaType): Promise<OkResponse | ErrorResponse> => {
   // conver from zod schema to api schema
-  const requestColor: string = data.color.map((color) => color.color).join('^');
+  const requestColor: string = data.color.map((color: { color: Color }) => color.color).join('^');
   const requestPurchaseYear: number | null = Number.isNaN(data.purchase_year) ? null : data.purchase_year;
   const requestPurchasePrice: number | null = Number.isNaN(data.purchase_price) ? null : data.purchase_price;
   const requestDurability: number | null = Number.isNaN(data.durability) ? null : data.durability;
@@ -19,7 +19,7 @@ export const useFetchRegisterItem = async (data: RegisterItemSchemaType): Promis
     purchase_price: requestPurchasePrice,
     durability: requestDurability,
     is_depreciation: data.is_depreciation,
-    connector: data.connector.map((connector) => connector.connector),
+    connector: data.connector.map((connector: { connector: Connector }) => connector.connector),
     color: requestColor,
   };
   // send

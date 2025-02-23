@@ -11,8 +11,8 @@ export const useFetchUpdateItem = async (
   const requestPurchaseYear: number | null = Number.isNaN(data.purchase_year) ? null : data.purchase_year;
   const requestPurchasePrice: number | null = Number.isNaN(data.purchase_price) ? null : data.purchase_price;
   const requestDurability: number | null = Number.isNaN(data.durability) ? null : data.durability;
-  const requestConnector: string[] = data.connector.map((connector) => connector.connector);
-  const requestColor: string = data.color.map((color) => color.color).join('^');
+  const requestConnector: string[] = data.connector.map((connector: { connector: string }) => connector.connector);
+  const requestColor: string = data.color.map((color: { color: string }) => color.color).join('^');
   const requestData: UpdateItemRequest = {
     name: data.name,
     visible_id: data.visible_id,
