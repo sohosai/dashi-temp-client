@@ -82,7 +82,7 @@ const RegisterItemForm: FC<Props> = (props) => {
       <ErrorMessage errors={errors} name="is_depreciation" message={errors.is_depreciation?.message} />
       <br />
       <label htmlFor="connector">Connector: </label>
-      {connectorArray.fields.map((field, index) => (
+      {connectorArray.fields.map((field, index: number) => (
         <div key={field.id}>
           <label htmlFor="connector">{index}</label>
           <select id="connector" {...register(`connector.${index}.connector` as const)}>
@@ -100,7 +100,7 @@ const RegisterItemForm: FC<Props> = (props) => {
       <input type="button" value="端子の追加" onClick={() => connectorArray.append({ connector: 'USB' })} />
       <br />
       <label htmlFor="color">Color: </label>
-      {colorArray.fields.map((field, index) => (
+      {colorArray.fields.map((field, index: number) => (
         <div key={field.id}>
           <label htmlFor="color">{index}</label>
           <select id="color" {...register(`color.${index}.color`)}>

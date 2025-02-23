@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { SearchItemsResponse } from '../../model/searchItemResponse';
+import { SearchItemResponse, SearchItemsResponse } from '../../model/searchItemResponse';
 import { Link } from 'react-router-dom';
 import { ErrorResult } from '..';
 import { ErrorResponse } from '../../model/errorResponse';
@@ -15,7 +15,7 @@ const SearchItemResult: FC<Props> = (props) => {
         <ErrorResult result={props.result} />
       ) : (
         <>
-          {props.result.search_items.map((item, index) =>
+          {props.result.search_items.map((item: SearchItemResponse, index: number) =>
             item.id === 1 ? (
               // 筑波大学のレンタルを拒否
               <div key={index}>

@@ -32,8 +32,9 @@ const UpdateItemForm: FC<Props> = (props) => {
       durability: props.individualItem === null ? null : props.individualItem.durability,
       is_depreciation: props.individualItem === null ? false : props.individualItem.is_depreciation,
       connector:
-        props.individualItem === null ? [] : props.individualItem.connector.map((connector) => ({ connector })),
-      color: props.individualItem === null ? [] : props.individualItem.color.split('^').map((color) => ({ color })),
+        props.individualItem === null ? [] : props.individualItem.connector.map((connector: string) => ({ connector })),
+      color:
+        props.individualItem === null ? [] : props.individualItem.color.split('^').map((color: string) => ({ color })),
     },
   });
 
@@ -94,7 +95,7 @@ const UpdateItemForm: FC<Props> = (props) => {
       <ErrorMessage errors={errors} name="is_depreciation" message={errors.is_depreciation?.message} />
       <br />
       <label htmlFor="connector">Connector: </label>
-      {connectorArray.fields.map((field, index) => (
+      {connectorArray.fields.map((field, index: number) => (
         <div key={field.id}>
           <label htmlFor="connector">{index}</label>
           <input id="connector" type="text" {...register(`connector.${index}.connector`)} />
@@ -107,7 +108,7 @@ const UpdateItemForm: FC<Props> = (props) => {
       <input type="button" value="端子の追加" onClick={() => connectorArray.append({ connector: '' })} />
       <br />
       <label htmlFor="color">Color: </label>
-      {colorArray.fields.map((field, index) => (
+      {colorArray.fields.map((field, index: number) => (
         <div key={field.id}>
           <label htmlFor="color">{index}</label>
           <input id="color" type="text" {...register(`color.${index}.color`)} />

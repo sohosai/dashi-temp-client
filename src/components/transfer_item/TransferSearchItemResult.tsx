@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction } from 'react';
-import { SearchItemsResponse } from '../../model/searchItemResponse';
+import { SearchItemResponse, SearchItemsResponse } from '../../model/searchItemResponse';
 import { ErrorResult, Loading } from '..';
 import { ErrorResponse } from '../../model/errorResponse';
 import { Pending } from '../../model/pending';
@@ -28,7 +28,7 @@ const TransferSearchItemResult: FC<Props> = (props) => {
       ) : (
         // fetch成功 (SearchItemについて)
         <>
-          {props.result.search_items.map((item, index) =>
+          {props.result.search_items.map((item: SearchItemResponse, index: number) =>
             item.id === 1 ? (
               // 筑波大学のレンタルを拒否
               <div key={index}>
