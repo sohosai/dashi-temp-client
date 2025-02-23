@@ -1,59 +1,32 @@
 import { FC } from 'react';
-import ExcelJS from 'exceljs';
+import { useFetchDepreiationCsv } from '../../hooks/useFetchDepreiationCsv';
+import { DepreiationCsvResponse } from '../../model/depreiationCsvResponse';
+import { ErrorResponse } from '../../model/errorResponse';
+import { useDownloadCsv } from '../../hooks/useDownloadCsv';
+import { useDepreiationCsvConverter } from '../../hooks/useDepreiationCsvConverter';
+import { DepreiationCsvList } from '../../model/depreiationCsv';
+
+const header = [
+  { header: '物品名', key: 'name' },
+  { header: '型番', key: 'product_number' },
+  { header: '耐用年数', key: 'durability' },
+  { header: '購入年度', key: 'purchase_year' },
+  { header: '購入金額', key: 'purchase_price' },
+];
 
 const DepreiationCsvButton: FC = () => {
   const handlerClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    const filename: string = 'sample.csv';
-    const sheetName: string = 'dashi';
-    const workbook: ExcelJS.Workbook = new ExcelJS.Workbook();
-    const worksheet: ExcelJS.Worksheet = workbook.addWorksheet(sheetName);
-
-    // ヘッダーの設定
-    worksheet.columns = [
-      { header: 'ID', key: 'id' },
-      { header: '作成日時', key: 'createdAt' },
-      { header: '名前', key: 'name' },
-    ];
-
-    // データ
-    worksheet.addRows([
-      {
-        id: 'f001',
-        createdAt: 1629902208,
-        name: 'りんご',
-      },
-      {
-        id: 'f002',
-        createdAt: 1629902245,
-        name: 'ぶどう',
-      },
-      {
-        id: 'f003',
-        createdAt: 1629902265,
-        name: 'ばなな',
-      },
-    ]);
-
-    // CSVデータをバッファとして取得
-    const csvBuffer: ExcelJS.Buffer = await workbook.csv.writeBuffer();
-    // Blobを作成
-    // Blob .. バイナリデータを格納するimuutableなオブジェクト
-    const blob: Blob = new Blob([csvBuffer], {
-      type: 'text/csv;charset=utf-8;',
-    });
-    // バイナリデータを保持するURLの一種
-    const url: string = window.URL.createObjectURL(blob);
-    // ダウンロード
-    const a: HTMLAnchorElement = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    a.remove();
-    // リソースを解放
-    URL.revokeObjectURL(url);
+    const result: DepreiationCsvResponse | ErrorResponse = await useFetchDepreiationCsv();
+    if ('code' in result && 'message' in result) {
+      // Error
+    } else {
+      // Ok
+      const body: DepreiationCsvList = useDepreiationCsvConverter(result);
+      await useDownloadCsv('depreiation.csv', '減価償却', header, body);
+    }
   };
-  return <button onClick={(e) => handlerClick(e)}>CSV形式 (UTF8)</button>;
+  return <button onClick={(e) => handlerClick(e)}>減価償却のCSV</button>;
 };
 
 export default DepreiationCsvButton;

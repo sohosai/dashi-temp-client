@@ -1,59 +1,37 @@
 import { FC } from 'react';
-import ExcelJS from 'exceljs';
+import { ErrorResponse } from '../../model/errorResponse';
+import { useDownloadCsv } from '../../hooks/useDownloadCsv';
+import { ItemCsvResponse } from '../../model/itemCsvResponse';
+import { useFetchItemCsv } from '../../hooks/useFetchItemCsv';
+import { useItemCsvConverter } from '../../hooks/useItemCsvConverter';
+import { ItemCsvList } from '../../model/itemCsv';
+
+const header = [
+  { header: '物品名', key: 'name' },
+  { header: '型番', key: 'product_number' },
+  { header: '物品詳細', key: 'description' },
+  //TODO: 保管場所の変更を忘れない
+  { header: '保管場所', key: 'place' },
+  //////////////////////////////////////////
+  { header: '個数', key: 'quantity' },
+  { header: '使用用途', key: 'usage' },
+  { header: '使用時期', key: 'duration' },
+  { header: '年間必要数', key: 'required_quantity' },
+];
 
 const ItemCsvButton: FC = () => {
   const handlerClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    const filename: string = 'sample.csv';
-    const sheetName: string = 'dashi';
-    const workbook: ExcelJS.Workbook = new ExcelJS.Workbook();
-    const worksheet: ExcelJS.Worksheet = workbook.addWorksheet(sheetName);
-
-    // ヘッダーの設定
-    worksheet.columns = [
-      { header: 'ID', key: 'id' },
-      { header: '作成日時', key: 'createdAt' },
-      { header: '名前', key: 'name' },
-    ];
-
-    // データ
-    worksheet.addRows([
-      {
-        id: 'f001',
-        createdAt: 1629902208,
-        name: 'りんご',
-      },
-      {
-        id: 'f002',
-        createdAt: 1629902245,
-        name: 'ぶどう',
-      },
-      {
-        id: 'f003',
-        createdAt: 1629902265,
-        name: 'ばなな',
-      },
-    ]);
-
-    // CSVデータをバッファとして取得
-    const csvBuffer: ExcelJS.Buffer = await workbook.csv.writeBuffer();
-    // Blobを作成
-    // Blob .. バイナリデータを格納するimuutableなオブジェクト
-    const blob: Blob = new Blob([csvBuffer], {
-      type: 'text/csv;charset=utf-8;',
-    });
-    // バイナリデータを保持するURLの一種
-    const url: string = window.URL.createObjectURL(blob);
-    // ダウンロード
-    const a: HTMLAnchorElement = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    a.remove();
-    // リソースを解放
-    URL.revokeObjectURL(url);
+    const result: ItemCsvResponse | ErrorResponse = await useFetchItemCsv();
+    if ('code' in result && 'message' in result) {
+      // Error
+    } else {
+      // Ok
+      const body: ItemCsvList = useItemCsvConverter(result);
+      await useDownloadCsv('item_list.csv', '物品リスト', header, body);
+    }
   };
-  return <button onClick={(e) => handlerClick(e)}>CSV形式 (UTF8)</button>;
+  return <button onClick={(e) => handlerClick(e)}>物品リストのCSV</button>;
 };
 
 export default ItemCsvButton;

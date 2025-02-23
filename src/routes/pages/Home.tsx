@@ -4,7 +4,7 @@ import { SearchItemsResponse } from '../../model/searchItemResponse';
 import { useFetchSearchItemWithUseEffect } from '../../hooks/useFetchSearchItemWithUseEffect';
 import { ErrorResponse } from '../../model/errorResponse';
 import { Pending } from '../../model/pending';
-import { Loading, SearchItemForm, SearchItemResult } from '../../components';
+import { DepreiationCsvButton, ItemCsvButton, Loading, SearchItemForm, SearchItemResult } from '../../components';
 
 const Home: FC = () => {
   const location = useLocation();
@@ -16,6 +16,8 @@ const Home: FC = () => {
     <>
       <SearchItemForm keywords={keywords} />
       <Link to="/register">Register</Link>
+      <DepreiationCsvButton />
+      <ItemCsvButton />
       {keywords === '' ? (
         // 検索欄が空
         <></>

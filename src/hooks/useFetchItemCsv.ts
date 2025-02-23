@@ -1,8 +1,8 @@
-import { DepreiationCsvResponse } from '../model/depreiationCsvResponse';
 import { ErrorResponse } from '../model/errorResponse';
+import { ItemCsvResponse } from '../model/itemCsvResponse';
 
-export const useFetchDepreiationCsv = async (): Promise<DepreiationCsvResponse | ErrorResponse> => {
-  const result: DepreiationCsvResponse | ErrorResponse = await fetch(`http://localhost:5000/api/csv/depreiation`, {
+export const useFetchItemCsv = async (): Promise<ItemCsvResponse | ErrorResponse> => {
+  const result: ItemCsvResponse | ErrorResponse = await fetch(`http://localhost:5000/api/csv/item`, {
     method: 'GET',
   })
     .then((res) => {
