@@ -26,7 +26,7 @@ const Barcode: FC<Props> = (props) => {
             format: 'code128',
             height: 35,
             displayValue: false,
-            lineColor: '#ED6D1F',
+            lineColor: '#1EB8CB',
             margin: 0,
           }}
         />

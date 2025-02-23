@@ -18,7 +18,7 @@ const Qr: FC<Props> = (props) => {
         border: '2px solid rgb(0, 0, 0)',
       }}
     >
-      <QRCode size={100} value={props.visible_id} bgColor={'#FFFFFF'} fgColor={'#ED6D1F'} />
+      <QRCode size={100} value={props.visible_id} bgColor={'#FFFFFF'} fgColor={'#1EB8CB'} />
       <p
         style={{
           margin: '0',
