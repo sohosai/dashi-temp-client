@@ -1,4 +1,4 @@
-type Record = 'Qr' | 'Barcode' | 'Nothing';
+import { Record } from './generateRequest';
 
 export type IndividualItemResponse = {
   id: number;
