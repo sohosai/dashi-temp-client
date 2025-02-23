@@ -1,0 +1,9 @@
+services:
+  dashi-client:
+    image: ghcr.io/sohosai/dashi-client/client:main
+    container_name: dashi-client
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - '3000:80'

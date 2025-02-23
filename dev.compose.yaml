@@ -1,0 +1,9 @@
+services:
+  dashi-client:
+    image: dashi-client
+    container_name: dashi-client
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - '3000:80'
