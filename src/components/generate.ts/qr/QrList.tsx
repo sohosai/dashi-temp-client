@@ -8,7 +8,7 @@ type Props = {
 const QrList: FC<Props> = (props) => {
   return (
     <>
-      {props.visible_ids.map((visible_id, index) => (
+      {props.visible_ids.map((visible_id: string, index: number) => (
         <Qr key={index} visible_id={visible_id} />
       ))}
     </>
