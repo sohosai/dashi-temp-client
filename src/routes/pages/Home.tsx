@@ -16,6 +16,9 @@ const Home: FC = () => {
     <>
       <SearchItemForm keywords={keywords} />
       <Link to="/register">Register</Link>
+      <br />
+      <Link to="/generate">Generate</Link>
+      <br />
       <DepreiationCsvButton />
       <ItemCsvButton />
       {keywords === '' ? (
