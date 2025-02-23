@@ -5,7 +5,6 @@ import { ErrorResponse } from '../../model/errorResponse';
 import { useDownloadCsv } from '../../hooks/useDownloadCsv';
 import { useDepreiationCsvConverter } from '../../hooks/useDepreiationCsvConverter';
 import { DepreiationCsvList } from '../../model/depreiationCsv';
-import { OkResponse } from '../../model/okResponse';
 import { Pending } from '../../model/pending';
 import { Loading } from '..';
 import CsvResult from './CsvResult';
@@ -21,7 +20,7 @@ const header = [
 
 const DepreiationCsvButton: FC = () => {
   // set result
-  const [result, setResult] = useState<OkResponse | ErrorResponse | Pending | null>(null);
+  const [result, setResult] = useState<DepreiationCsvResponse | ErrorResponse | Pending | null>(null);
   // set modal state
   const [modalIsOpen, setIsOpen] = useState<boolean>(true);
   // handle modal close
@@ -42,7 +41,7 @@ const DepreiationCsvButton: FC = () => {
       // Ok
       const body: DepreiationCsvList = useDepreiationCsvConverter(result);
       await useDownloadCsv('depreiation.csv', '減価償却', header, body);
-      setResult('ok');
+      setResult(result);
       return;
     }
   };

@@ -5,7 +5,6 @@ import { ItemCsvResponse } from '../../model/itemCsvResponse';
 import { useFetchItemCsv } from '../../hooks/useFetchItemCsv';
 import { useItemCsvConverter } from '../../hooks/useItemCsvConverter';
 import { ItemCsvList } from '../../model/itemCsv';
-import { OkResponse } from '../../model/okResponse';
 import { Pending } from '../../model/pending';
 import { Loading } from '..';
 import CsvResult from './CsvResult';
@@ -26,7 +25,7 @@ const header = [
 
 const ItemCsvButton: FC = () => {
   // set result
-  const [result, setResult] = useState<OkResponse | ErrorResponse | Pending | null>(null);
+  const [result, setResult] = useState<ItemCsvResponse | ErrorResponse | Pending | null>(null);
   // set modal state
   const [modalIsOpen, setIsOpen] = useState<boolean>(true);
   // handle modal close
@@ -46,7 +45,7 @@ const ItemCsvButton: FC = () => {
       // Ok
       const body: ItemCsvList = useItemCsvConverter(result);
       await useDownloadCsv('item_list.csv', '物品リスト', header, body);
-      setResult('ok');
+      setResult(result);
     }
   };
   return (
