@@ -1,4 +1,4 @@
-type SearchItemResponse = {
+export type SearchItemResponse = {
   id: number;
   visible_id: string;
   name: string;
