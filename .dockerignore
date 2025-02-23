@@ -6,8 +6,10 @@
 .envrc
 .gitignore
 .prettierrc
+COPYING
+dev.compose.yaml
 Dockerfile
 flake.lock
 flake.nix
+prod.compose.yaml
 README.md
-COPYING
